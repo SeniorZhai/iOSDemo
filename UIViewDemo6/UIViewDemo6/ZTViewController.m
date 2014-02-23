@@ -39,6 +39,30 @@ UIBarButtonItem* done;
     [topView setItems:array];
     // 为textView关联的虚拟键盘设置附件。
     [self.textView setInputAccessoryView:topView];
+    //
+    UIMenuItem * mailShare = [[UIMenuItem alloc]initWithTitle:@"邮件分享" action:@selector(mailShare)];
+    UIMenuItem * weiboShare = [[UIMenuItem alloc] initWithTitle:@"微博分享" action:@selector(weiboShare)];
+    UIMenuController * menu = [UIMenuController sharedMenuController];
+    [menu setMenuItems:[NSArray arrayWithObjects:mailShare,weiboShare,nil]];
+}
+-(BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    if(action == @selector(mailShare:)||action == @selector(weiboSHare:))
+    {
+        if(self.textView.selectedRange.length > 0)
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+-(void)mailShare:(id)sender
+{
+    NSLog(@"email");
+}
+-(void)weiboShare:(id)sender
+{
+    NSLog(@"weibo");
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
