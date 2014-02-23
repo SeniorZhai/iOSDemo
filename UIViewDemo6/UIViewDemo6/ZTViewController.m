@@ -31,6 +31,14 @@ UIBarButtonItem* done;
 	// 创建一个UIBarButtonItem对象，并赋给done属性
 	done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                          target:self action:@selector(finishEdit)];
+    UIToolbar * topView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+    UIBarButtonItem* myBn = [[UIBarButtonItem alloc] initWithTitle:@"无工作" style:UIBarButtonItemStyleBordered target:self action:nil];
+    UIBarButtonItem* spaceBn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem* doneBn = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:nil];
+    NSArray * array = [NSArray arrayWithObjects:myBn,spaceBn,doneBn, nil];
+    [topView setItems:array];
+    // 为textView关联的虚拟键盘设置附件。
+    [self.textView setInputAccessoryView:topView];
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
@@ -47,7 +55,6 @@ UIBarButtonItem* done;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
